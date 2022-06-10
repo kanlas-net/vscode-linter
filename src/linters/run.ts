@@ -182,18 +182,12 @@ export async function run(
       availableLinters[name].enabled,
   );
 
-  if (!matchingLinters.length) {
-    debug("No linters found for", JSON.stringify(document.languageId));
-  }
-
   offenses.length = 0;
   diagnosticCollection.clear();
 
   const cacheEnabled = (
     vscode.workspace.getConfiguration("linter") as unknown as Config
   ).cache;
-
-  debug("Reading from cache?", cacheEnabled);
 
   if (cacheEnabled) {
     setDiagnosticsFromCache({
